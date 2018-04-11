@@ -1,0 +1,7 @@
+#Ignore everything
+*
+
+#Whitelist CiviCRM settings & readme
+!civicrm.settings.php
+!README.md
+!.gitignore
