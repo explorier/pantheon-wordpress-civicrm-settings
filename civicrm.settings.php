@@ -95,8 +95,19 @@ if (!empty($_SERVER['PRESSFLOW_SETTINGS'])) {
     //define site base url, detect if is Lando dev server or Pantheon server
     if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
       $base_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://' . $_SERVER['HTTP_X_FORWARDED_HOST'];
+
+      // Override the extensions directory.
+       $civicrm_setting['Directory Preferences']['extensionsDir'] = '../../plugins/civicrm_extensions';
+      // Override the extensions resource URL
+       $civicrm_setting['URL Preferences']['extensionsURL'] = 'wp-content/plugins/civicrm_extensions';
     } else {
       $base_url = $_SERVER['HTTP_X_PROTO'] . $_SERVER['HTTP_HOST'];
+
+      // Override the extensions directory.
+      $civicrm_setting['Directory Preferences']['extensionsDir'] = '/srv/bindings/' . $_SERVER['USER'] . '/code/wp-content/plugins/civicrm_extensions';
+
+      // Override the extensions resource URL
+       $civicrm_setting['URL Preferences']['extensionsURL'] = $base_url . '/wp-content/plugins/civicrm_extensions';
     }
   }
 }
@@ -281,9 +292,6 @@ elseif (!defined('CIVICRM_UF_BASEURL')) {
  // Override the Custom php path directory.
  // $civicrm_setting['Directory Preferences']['customPHPPathDir'] = '/path/to/custom-php-dir';
 
- // Override the extensions directory.
- // $civicrm_setting['Directory Preferences']['extensionsDir'] = '/path/to/extensions-dir';
-
  // Override the resource url
  // $civicrm_setting['URL Preferences']['userFrameworkResourceURL'] = 'http://example.com/example-resource-url/';
 
@@ -292,9 +300,6 @@ elseif (!defined('CIVICRM_UF_BASEURL')) {
 
  // Override the Custom CiviCRM CSS URL
  // $civicrm_setting['URL Preferences']['customCSSURL'] = 'http://example.com/example-css-url' ;
-
- // Override the extensions resource URL
- // $civicrm_setting['URL Preferences']['extensionsURL'] = 'http://example.com/pathtoextensiondir'
 
  // Disable display of Community Messages on home dashboard
  // $civicrm_setting['CiviCRM Preferences']['communityMessagesUrl'] = false;
